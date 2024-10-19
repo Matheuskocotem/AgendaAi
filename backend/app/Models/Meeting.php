@@ -9,17 +9,22 @@ class Meeting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'room_id', 'start_time', 'end_time'];
-
-    // Um agendamento pertence a um usuário
+    protected $fillable = [
+        'room_id',
+        'user_id',
+        'title',
+        'description',
+        'start_time',
+        'end_time',
+    ];
+    
+    public function room()
+    {
+        return $this->belongsTo(MeetingRoom::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    // Um agendamento pertence a uma sala
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
     }
 }
