@@ -1,24 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-      meta: {
-        title: 'Home'
-      }
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import('../views/Dashboard.vue'),
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-      meta: {
-        title: 'About'
-      }
+      path: "/dashboard/escolher-sala",
+      name: "escolher-sala",
+      component: () => import('../views/EscolherSala.vue'),
+    },
+    {
+      path: "/dashboard/agendar-reuniao/:roomId",  // Rota para agendar reunião, com parâmetro da sala
+      name: "agendar-reuniao",
+      component: () => import('../views/AgendarReuniao.vue'),
+    },
+    {
+      path: "/dashboard/visualizar-reunioes",  // Rota para visualizar reuniões
+      name: "visualizar-reunioes",
+      component: () => import('../views/VisualizarReunioes.vue'),
     },
     {
       path: '/login',
