@@ -14,11 +14,26 @@ const router = createRouter({
       }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      path: "/dashboard/escolher-sala",
+      name: "escolher-sala",
+      component: () => import('../views/EscolherSala.vue'),
+    },
+    {
+      path: "/dashboard/agendar-reuniao/:roomId",  // Rota para agendar reunião, com parâmetro da sala
+      name: "agendar-reuniao",
+      component: () => import('../views/AgendarReuniao.vue'),
+    },
+    {
+      path: "/dashboard/visualizar-reunioes",  // Rota para visualizar reuniões
+      name: "visualizar-reunioes",
+      component: () => import('../views/VisualizarReunioes.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/Login.vue'),
       meta: {
-        title: 'About'
+        title: 'Login'
       }
     }
   ]
