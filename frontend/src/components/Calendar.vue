@@ -35,6 +35,7 @@ function createCalendar() {
   calendar = new Calendar(calendarEl.value, {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
+    locale: 'Br',
     events: props.events,
     height: props.height,
     dateClick: (info) => {

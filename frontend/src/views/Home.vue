@@ -12,6 +12,8 @@ const showModal = ref(false)
 const selectedDate = ref('')
 const availableTimes = ref([])
 
+const selectedEventIndex = ref(null)
+
 const handleDateClick = (info) => {
   console.log('Data clicada:', info.dateStr)
   selectedDate.value = info.dateStr
@@ -22,19 +24,42 @@ const handleDateClick = (info) => {
 }
 
 const handleEventClick = (info) => {
-  // Implementar lógica para editar ou excluir evento
-  console.log('Evento clicado:', info.event)
+  const event = info.event
+  selectedEventIndex.value = events.value.findIndex(e => e.start === event.start.toISOString().slice(0, 10))
+  selectedDate.value = event.start.toISOString().slice(0, 10)
+  availableTimes.value = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00']
+  
+  showModal.value = true
 }
 
 const saveReservation = (reservation) => {
-  events.value.push({
-    title: `${reservation.name} - Sala X`,
-    start: `${reservation.date}T${reservation.startTime}`,
-    end: `${reservation.date}T${reservation.endTime}`
-  })
+  if (selectedEventIndex.value === null) {
+    // Novo evento
+    events.value.push({
+      title: `${reservation.name} - Sala X`,
+      start: `${reservation.date}T${reservation.startTime}`,
+      end: `${reservation.date}T${reservation.endTime}`
+    })
+  } else {
+    // Editando evento existente
+    const event = events.value[selectedEventIndex.value]
+    event.title = `${reservation.name} - Sala X`
+    event.start = `${reservation.date}T${reservation.startTime}`
+    event.end = `${reservation.date}T${reservation.endTime}`
+  }
+  
   showModal.value = false
-  // Aqui você deve enviar a reserva para o backend
+  selectedEventIndex.value = null // Resetar o índice selecionado
 }
+
+const deleteEvent = () => {
+  if (selectedEventIndex.value !== null) {
+    events.value.splice(selectedEventIndex.value, 1)
+    showModal.value = false
+    selectedEventIndex.value = null
+  }
+}
+
 </script>
 
 <template>
@@ -55,6 +80,7 @@ const saveReservation = (reservation) => {
       :availableTimes="availableTimes"
       @close="showModal = false"
       @save="saveReservation"
+      @delete="deleteEvent"
     />
   </div>
 </template>
