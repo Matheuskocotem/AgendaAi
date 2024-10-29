@@ -13,10 +13,12 @@ const selectedDate = ref('')
 const availableTimes = ref([])
 
 const handleDateClick = (info) => {
+  console.log('Data clicada:', info.dateStr)
   selectedDate.value = info.dateStr
   // Aqui você deve buscar os horários disponíveis para a data selecionada
   availableTimes.value = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00']
   showModal.value = true
+  console.log('showModal:', showModal.value)
 }
 
 const handleEventClick = (info) => {

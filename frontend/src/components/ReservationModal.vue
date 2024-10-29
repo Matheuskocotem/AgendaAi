@@ -31,7 +31,7 @@ const resetForm = () => {
 </script>
 
 <template>
-  <div v-if="show" class="modal-overlay">
+  <div v-show="show" class="modal-overlay">
     <div class="modal">
       <h2>Reservar Sala</h2>
       <form @submit.prevent="save">
@@ -71,6 +71,7 @@ const resetForm = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal {
@@ -79,6 +80,9 @@ const resetForm = () => {
   border-radius: 0.5rem;
   width: 100%;
   max-width: 500px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
