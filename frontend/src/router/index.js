@@ -19,12 +19,17 @@ const router = createRouter({
       component: () => import('../views/EscolherSala.vue'),
     },
     {
-      path: "/dashboard/agendar-reuniao/:roomId",  // Rota para agendar reunião, com parâmetro da sala
+      path: "/dashboard/escolher-sala2",
+      name: "escolher-sala",
+      component: () => import('../views/MeetingRoomDashboard.vue'),
+    },
+    {
+      path: "/dashboard/agendar-reuniao/:roomId", 
       name: "agendar-reuniao",
       component: () => import('../views/AgendarReuniao.vue'),
     },
     {
-      path: "/dashboard/visualizar-reunioes",  // Rota para visualizar reuniões
+      path: "/dashboard/visualizar-reunioes",  
       name: "visualizar-reunioes",
       component: () => import('../views/VisualizarReunioes.vue'),
     },
